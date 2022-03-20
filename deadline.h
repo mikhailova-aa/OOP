@@ -28,24 +28,11 @@ int get_time() const {
 
 //changing importance 
 
-bool change_imp(int NewImp) {
-    if ((NewImp <= 3) & (NewImp >= 1)){
-    	imp = NewImp;
-    return true; 
-} else {
-    return false;
-}
-    }
+bool change_imp(int NewImp);
 
 // deadline extension
 
-bool change_time(int dt){
-    if (dt > 0) {
-        time += dt;
-    return true;
-} else {
-    return false;
-}}
+bool change_time(int dt);
     
 };
 

@@ -6,7 +6,7 @@
 bool DeadlineTask::change_imp(int NewImp){
     int tmp;
     if ((NewImp <= 3) & (NewImp >= 1)){
-	tmp = NewImp;
+	imp = NewImp;
 	return true;
 } else{
     return false;

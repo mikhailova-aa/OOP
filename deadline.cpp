@@ -39,19 +39,30 @@ int Planner::add_task(Plan *T){
 	
 		 while(p->next != NULL)
     {
-        if(*(T->data) < *(p->next->data))
+        if(*(T->data) > *(p->next->data))
         {
-            //cout << "if" << endl;
             p=p->next;
         }
         else
         {   
-            //cout << "else" << endl;
             break;
         } 
     } 
-		
-		
+	}
+	else{ while((p->next != NULL) & *(T->data < 23))
+    {
+        if(*(T->data) > *(p->next->data))
+        {
+            T->data+=;
+            p=p->next;
+            
+        }
+        else
+        {   
+            break;
+        } 
+    } 
+				
 		
 		
 		

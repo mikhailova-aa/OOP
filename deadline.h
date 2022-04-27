@@ -42,6 +42,10 @@ bool change_imp(int NewImp);
 
 bool change_time(int dt);
 
+const int operator>(const DeadlineTask& other) const{
+	return time > other.time;
+	}
+
 const int operator<(const DeadlineTask& other) const{
 	return time < other.time;
 	}
@@ -49,7 +53,9 @@ const int operator<(const DeadlineTask& other) const{
 const int operator==(const DeadlineTask& other) const{
 	return per == 0;
 	}
-    
+const int operator+=(const DeadlineTask& other) const{
+	return time+=period;
+	}
 };
 
 

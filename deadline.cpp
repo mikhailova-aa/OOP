@@ -4,7 +4,6 @@
 
 
 bool DeadlineTask::change_imp(int NewImp){
-    int tmp;
     if ((NewImp <= 3) & (NewImp >= 1)){
 	imp = NewImp;
 	return true;
@@ -35,3 +34,43 @@ test_periodical();
 return 0;
 
 }
+
+int AddTask(Plan *head, Plan *T)
+{
+    Plan *p = List.front();
+    
+}
+
+int SortPlan(Plan *head);
+{
+	
+	Plan *p = head; 
+	while(p->next != NULL)
+	{ 
+		if (
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+

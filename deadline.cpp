@@ -13,7 +13,7 @@ bool DeadlineTask::change_imp(int NewImp){
     }
 
 bool DeadlineTask::change_time(int dt){
-    if (dt >0) {
+    if ((dt >=0) & (time + dt < 23) {
 	time += dt;
     return true;
 } else {
@@ -22,34 +22,34 @@ bool DeadlineTask::change_time(int dt){
 
 
 bool PeriodicalTask::skip_execution(){
-    time += period; //task is moved to the next scheduled
-return true;
-}
+	if (time + period < 23){
+		time += period; //task is moved to the next scheduled
+	return true;
+} else {
+	return false;
+
+}}
 
 
-int Deadline() 
-{
-test_deadline();
-test_periodical();
-return 0;
 
-}
-
-int AddTask(Plan *head, Plan *T)
-{
-    Plan *p = List.front();
-    
-}
-
-int SortPlan(Plan *head);
-{
+int Planner::add_task(Plan *T){
+	Plan *p = head;
 	
-	Plan *p = head; 
-	while(p->next != NULL)
-	{ 
-		if (
-		
-		
+	if (*(T->task) == 0){
+	
+		 while(p->next != NULL)
+    {
+        if(*(T->data) < *(p->next->data))
+        {
+            //cout << "if" << endl;
+            p=p->next;
+        }
+        else
+        {   
+            //cout << "else" << endl;
+            break;
+        } 
+    } 
 		
 		
 		

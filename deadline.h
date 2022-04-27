@@ -7,7 +7,7 @@ using std::list;
 
 void test_deadline();
 void test_periodical();
-int Deadline();
+
 using namespace std;
 
 class DeadlineTask{
@@ -18,7 +18,8 @@ public:
     string task; //task
     string name; //executor
     int imp; // level of importance, on a scale of 1 to 3
-    int time; // deadline timestamp 
+    int time; // deadline timestamp, on a scale of 0 to 23
+    int per; // label 0 or 1 for non-periodic tasks and petiodic
 
 
 // creating task with params
@@ -40,6 +41,14 @@ bool change_imp(int NewImp);
 // deadline extension
 
 bool change_time(int dt);
+
+const int operator<(const DeadlineTask& other) const{
+	return time < other.time;
+	}
+
+const int operator==(const DeadlineTask& other) const{
+	return per == 0;
+	}
     
 };
 
@@ -50,7 +59,7 @@ class PeriodicalTask : public DeadlineTask
 
 public:
 	
-int period; // number of seconds between nearest execurion	
+int period; // number of hours between nearest execution	
 
 // creating task with params
 
@@ -65,7 +74,7 @@ int get_period() const{
 bool skip_execution();
 };
 
-// должен быть отсортирован по времени (т.е. в начале стоят те задания, что должны быть выполнены раньше остальных
+// должен быть отсортирован по времени (т.е. в начале стоят те задания, что должны быть выполнены раньше остальных) 
 class Plan
 {
 public:
@@ -84,7 +93,21 @@ Plan(DeadlineTask *newtask)
 
 class Planner
 { 
+public:
+
+string day;
 Plan *head;
+int count = 0; // amount of tasks
+
+
+Planner(const string NewDay){
+	this->day = NewDay;
+	Periodical Task *T = new PeriodicalTask("Нулевой элемент", "none", "none", 1, 0);//null element for ease of use of the list
+	head = new Plan(T);
+	
+}
+
+int add_task();
 
 
 
@@ -97,10 +120,7 @@ Plan *head;
 
 
 
-
-
-
-
+};
 
 
 

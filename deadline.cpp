@@ -61,7 +61,9 @@ int Planner::add_task(Plan *T){
         {   
             break;
         } 
-    } 
+    }}
+    return 0;
+ } 
 				
 		
 		

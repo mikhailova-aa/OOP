@@ -115,7 +115,7 @@ Planner(const string NewDay){
 
 int add_task();
 
-
+int ones_plan();
 
 
 

@@ -89,6 +89,7 @@ int Planner::completed_task(Plan *T){
         {
             if(p->next == T)
             {
+            	cout << "Task : " << T->task->text << "\n Importance: " << T->task->imp << "\n Lead time: " << T->task->time << "\n" << endl;
                 Plan *y = T->next;
                 delete(T);
                 p->next = y;

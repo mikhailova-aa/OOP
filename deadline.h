@@ -15,7 +15,7 @@ class DeadlineTask{
 public: 
 
     string id; //string identifier 
-    string task; //task
+    string text; //task
     string name; //executor
     int imp; // level of importance, on a scale of 1 to 3
     int time; // deadline timestamp, on a scale of 0 to 23
@@ -24,8 +24,8 @@ public:
 
 // creating task with params
 
-DeadlineTask(const string& id, const string& task, const string& name, int imp, int time)
-    :id(id), task(task), name(name), imp(imp), time(time){}
+DeadlineTask(const string& id, const string& text, const string& name, int imp, int time, int per)
+    :id(id), text(text), name(name), imp(imp), time(time), per(per){}
     
 int get_imp() const {
     return imp;
@@ -50,12 +50,12 @@ const int operator<(const DeadlineTask& other) const{
 	return time < other.time;
 	}
 
-const int operator==(const DeadlineTask& other) const{
-	return per == 0;
-	}
-const int operator+=(const DeadlineTask& other) const{
-	return time+=period;
-	}
+//const int operator==(const DeadlineTask& other) const{
+	//return per == 0;
+	//}
+//const int operator+=(const DeadlineTask&, int s) const{
+	//return (time + s);
+	//}
 };
 
 
@@ -69,9 +69,14 @@ int period; // number of hours between nearest execution
 
 // creating task with params
 
-PeriodicalTask(const string& id, const string& task, const string& name, int imp, int time, int period)
-    :id(id), task(task), name(name), imp(imp), time(time), period(period){}
-    
+//PeriodicalTask(const string& id, const string& task, const string& name, int imp, int time, int per)
+    //:id(id), task(task), name(name), imp(imp), time(time), per(per), period(period){}
+
+PeriodicalTask(const string& id, const string& text, const string& name, int imp, int time, int per, const int period):DeadlineTask(id, text, name, imp, time, per)
+{
+	this->period = period;
+}    
+       
 int get_period() const{
 	return period;
 }
@@ -85,11 +90,11 @@ class Plan
 {
 public:
 
-DeadlineTask *task;
+PeriodicalTask *task;
 Plan *next;
 
 Plan () {this->next = NULL;}
-Plan(DeadlineTask *newtask)
+Plan(PeriodicalTask *newtask)
 {
 	this->task = newtask;
 	this->next = NULL;
@@ -108,22 +113,15 @@ int count = 0; // amount of tasks
 
 Planner(const string NewDay){
 	this->day = NewDay;
-	Periodical Task *T = new PeriodicalTask("Нулевой элемент", "none", "none", 1, 0);//null element for ease of use of the list
+	PeriodicalTask *T = new PeriodicalTask("Нулевой элемент", "none", "none", 1, 0, 1, 1);//null element for ease of use of the list
 	head = new Plan(T);
 	
 }
+void add_task(Plan *T);
 
-int add_task();
+void ones_plan(string n);
 
-int ones_plan();
-
-
-
-
-
-
-
-
+int completed_task(Plan *T);
 
 
 };

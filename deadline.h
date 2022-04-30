@@ -27,20 +27,34 @@ public:
 DeadlineTask(const string& id, const string& text, const string& name, int imp, int time, int per)
     :id(id), text(text), name(name), imp(imp), time(time), per(per){}
     
-int get_imp() const {
+virtual int get_imp() const {
     return imp;
   }
-int get_time() const {
+virtual int get_time() const {
     return time;
   }
 
 //changing importance 
 
-bool change_imp(int NewImp);
+virtual bool change_imp(int NewImp){
+    if ((NewImp <= 3) & (NewImp >= 1)){
+	imp = NewImp;
+	return true;
+} else{
+    return false;
+}
+    }
 
 // deadline extension
 
-bool change_time(int dt);
+virtual bool change_time(int dt){
+    if ((dt >=0) & (time + dt < 23)) {
+	time += dt;
+    return true;
+} else {
+    return false;
+}}
+
 
 const int operator>(const DeadlineTask& other) const{
 	return time > other.time;
@@ -82,7 +96,7 @@ int get_period() const{
 }
 // skipping execution
 
-bool skip_execution();
+bool change_time();
 };
 
 // должен быть отсортирован по времени (т.е. в начале стоят те задания, что должны быть выполнены раньше остальных) 
@@ -113,7 +127,7 @@ int count = 0; // amount of tasks
 
 Planner(const string NewDay){
 	this->day = NewDay;
-	PeriodicalTask *T = new PeriodicalTask("Нулевой элемент", "none", "none", 1, 0, 1, 1);//null element for ease of use of the list
+	PeriodicalTask *T = new PeriodicalTask("Нулевой элемент", "none", "none", 1, 0, 1,1);//null element for ease of use of the list
 	head = new Plan(T);
 	
 }

@@ -2,26 +2,25 @@
 #include <string>
 #include "deadline.h"
 
+//virtual bool DeadlineTask::change_imp(int NewImp){
+  //  if ((NewImp <= 3) & (NewImp >= 1)){
+	//imp = NewImp;
+	//return true;
+//} else{
+  //  return false;
+//}
+  //  }
 
-bool DeadlineTask::change_imp(int NewImp){
-    if ((NewImp <= 3) & (NewImp >= 1)){
-	imp = NewImp;
-	return true;
-} else{
-    return false;
-}
-    }
-
-bool DeadlineTask::change_time(int dt){
-    if ((dt >=0) & (time + dt < 23)) {
-	time += dt;
-    return true;
-} else {
-    return false;
-}}
+//virtual bool DeadlineTask::change_time(int dt){
+  //  if ((dt >=0) & (time + dt < 23)) {
+	//time += dt;
+   // return true;
+//} else {
+ //   return false;
+//}}
 
 //по сути это не нужно, так как можно просто отмечать задание как выполненное, а следующее выполнение этого задания по расписанию останется в списке
-bool PeriodicalTask::skip_execution(){
+bool PeriodicalTask::change_time(){
 	if (time + period < 23){
 		time += period; //task is moved to the next scheduled
 	return true;

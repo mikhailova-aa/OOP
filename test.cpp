@@ -40,7 +40,7 @@ void test_periodical() {
 
     // skipping execution 
     bool res;
-    res = p1.skip_execution();
+    res = p1.change_time();
     assert(res);
     assert(p1.get_time() == 12);
 

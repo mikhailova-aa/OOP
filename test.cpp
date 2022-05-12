@@ -46,10 +46,31 @@ void test_periodical() {
 
 }
 
+void test_list() {
+
+    //creating two tasks
+    PeriodicalTask *t1 = new PeriodicalTask("id1", "text1", "name1", 2, 12, 1, 2);
+    assert(t1->get_imp() == 2);
+    DeadlineTask *t2 = new DeadlineTask("id2", "text2", "name2", 1, 15, 0);
+    assert(t2->get_imp() == 1);
+    //add them to the plan
+    Plan *Plan1 = new Plan(t1);
+    string day = "day1";
+    Planner *Planner1 = new Planner(day);
     
+    Planner1->add_task(Plan1);
+    assert(Plan1->task->id == "id1");
+    
+    
+    
+	
+
+
+}    
 
 int main() {
     test_deadline();
     test_periodical();
+    test_list();
     return 0;
 }

@@ -100,15 +100,16 @@ int get_period() const{
 
 bool change_time();
 
-int is_periodical()  {return period;};
+bool is_periodical() const {return true;};
 };
 
 // должен быть отсортирован по времени (т.е. в начале стоят те задания, что должны быть выполнены раньше остальных) 
-/*class Plan
+class Plan
 {
 public:
 
 DeadlineTask *task;
+
 Plan *next;
 
 Plan () {this->next = NULL;}
@@ -118,41 +119,28 @@ Plan(DeadlineTask *newtask)
 	this->next = NULL;
 }
 
-};*/
+};
 
 class Planner
 { 
 public:
 
 string day;
-Planner *head;
+Plan *head;
 int count = 0; // amount of tasks
 
-DeadlineTask *task;
-Planner *next;
 
-Planner () {this->next = NULL;}
-
-Planner(DeadlineTask *newtask, const string NewDay)
-{
-	this->day = NewDay;
-	this->task = newtask;
-	this->next = NULL;
-	DeadlineTask *T = new DeadlineTask("Нулевой элемент", "none", "none", 1, 2);//null element for ease of use of the list
-}
-
-/*Planner(const string NewDay){
+Planner(const string NewDay){
 	this->day = NewDay;
 	DeadlineTask *T = new DeadlineTask("Нулевой элемент", "none", "none", 1, 2);//null element for ease of use of the list
 	head = new Plan(T);
 	
-}*/
-
-void add_task(DeadlineTask *T);
+}
+void add_task(Plan *T);
 
 void ones_plan(string n);
 
-int completed_task(DeadlineTask *T);
+int completed_task(string identifier);
 
 
 };

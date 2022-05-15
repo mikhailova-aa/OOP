@@ -35,7 +35,7 @@ bool PeriodicalTask::change_time(){
 void Planner::add_task(Plan *T){
 	Plan *p = head;
 	
-	if (T->task->is_periodical()){
+	if (!T->task->is_periodical()){
 	
 		 while(p->next != NULL)
     {
@@ -49,19 +49,21 @@ void Planner::add_task(Plan *T){
         } 
     } 
 	}
-	else{ while((p->next != NULL) && (T->task->time < 23))
-    {
-        if(*(T->task) > *(p->next->task))
-        {
-            T->task->time+=T->task->period;
-            p=p->next;
-            
-        }
-        else
-        {   
-            break;
-        } 
-    }}
+	else{   int Pd = T->task->is_periodical();
+		while((p->next != NULL) && (T->task->time < 23))
+	    {
+	    	printf("time now = %d", T->task->time);
+		if(*(T->task) > *(p->next->task))
+		{
+		    T->task->time+=Pd;
+		    p=p->next;
+		    
+		}
+		else
+		{   
+		    break;
+		} 
+	    }}
  } 
 //Displays information about tasks for one executor				
 void Planner::ones_plan(string n){

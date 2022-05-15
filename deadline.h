@@ -100,7 +100,7 @@ int get_period() const{
 
 bool change_time();
 
-bool is_periodical() const {return true;};
+int is_periodical()  {return period;};
 };
 
 // должен быть отсортирован по времени (т.е. в начале стоят те задания, что должны быть выполнены раньше остальных) 

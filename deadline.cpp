@@ -35,7 +35,7 @@ bool PeriodicalTask::change_time(){
 void Planner::add_task(Plan *T){
 	Plan *p = head;
 	
-	if (T->task->per == 0){
+	if (T->task->is_periodical()){
 	
 		 while(p->next != NULL)
     {

@@ -6,9 +6,10 @@
 void test_deadline() {
     
     //creating deadline task
-    DeadlineTask t1("id", "abc", "msdks", 2, 14, 0);
+    DeadlineTask t1("id", "abc", "msdks", 2, 14);
     assert(t1.get_imp() == 2);
     assert(t1.get_time() == 14);
+    assert(t1.is_periodical());
 
     //changing importance without error
     bool res;
@@ -33,7 +34,7 @@ void test_deadline() {
 void test_periodical() {
 
     // creating periodical task
-    PeriodicalTask p1("id", "task", "name", 2, 10, 1, 2);
+    PeriodicalTask p1("id", "task", "name", 2, 10, 1);
     assert(p1.get_imp() == 2);
     assert(p1.get_time() == 10);
     assert(p1.get_period() == 2);
@@ -61,12 +62,23 @@ void test_list() {
     
     for(int i=0; i<2; i++)
     {
-        PeriodicalTask *t1= new PeriodicalTask("id", "text", "name", 2, 11+i, 1, 2);
+        PeriodicalTask *t1= new PeriodicalTask("id", "text", "name", 2, 11+i, 1);
         assert(t1->get_imp() == 2);
         Plan *Plan1= new Plan (t1);
         Planner1->add_task(Plan1);
     }
     
+    if(Planner1->day != day) printf("Error 1\n");
+    
+    
+    int i=0;
+    Plan *p = Planner1->head;
+    while(p!=NULL)
+    {
+        i++;
+        p=p->next;
+    }
+    printf(" i = %d \n ", i);
     
     
     

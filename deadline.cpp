@@ -1,107 +1,122 @@
 #include <iostream>
+
 #include <string>
+
 #include "deadline.h"
 
 //virtual bool DeadlineTask::change_imp(int NewImp){
-  //  if ((NewImp <= 3) & (NewImp >= 1)){
-	//imp = NewImp;
-	//return true;
+//  if ((NewImp <= 3) & (NewImp >= 1)){
+//imp = NewImp;
+//return true;
 //} else{
-  //  return false;
+//  return false;
 //}
-  //  }
+//  }
 
 //virtual bool DeadlineTask::change_time(int dt){
-  //  if ((dt >=0) & (time + dt < 23)) {
-	//time += dt;
-   // return true;
+//  if ((dt >=0) & (time + dt < 23)) {
+//time += dt;
+// return true;
 //} else {
- //   return false;
+//   return false;
 //}}
 
 //по сути это не нужно, так как можно просто отмечать задание как выполненное, а следующее выполнение этого задания по расписанию останется в списке
-bool PeriodicalTask::change_time(){
-	if (time + period < 23){
-		time += period; //task is moved to the next scheduled
-	return true;
-} else {
-	return false;
+bool PeriodicalTask::change_time() {
+  if (time + period < 23) {
+    time += period; //task is moved to the next scheduled
+    return true;
+  } else {
+    return false;
 
-}}
-
+  }
+}
 
 //task with a deadline is inserted at the right place in an already ordered list
 //periodical task is inserted several times, taking into account the period within a day
-void Planner::add_task(DeadlineTask *T){
-	Planner *p = head;
-	
-	if (!T->is_periodical()){
-	
-		 while(p->next != NULL)
-    {
-        if(T > p->next->task)
-        {
-            p=p->next;
-        }
-        else
-        {   
-            break;
-        } 
-    } 
-	}
-	else{   int Pd = T->is_periodical();
-		while((p->next != NULL) && (T->time < 23))
-	    {
-	    	printf("time now = %d", T->time);
-		if(T > p->next->task)
-		{
-		    T->time+=Pd;
-		    p=p->next;
-		    
-		}
-		else
-		{   
-		    break;
-		} 
-	    }}
- } 
+void Planner::add_task(Plan * T) {
+  Plan * p = head;
+  printf("is periodical = %d\n", T -> task -> is_periodical());
+  while (p -> next != NULL) {
+
+    if ( * (T -> task) > * (p -> next -> task)) {
+
+      p = p -> next;
+    } else {
+
+      break;
+    }
+  }
+  T -> next = p -> next;
+  p -> next = T;
+}
 //Displays information about tasks for one executor				
-void Planner::ones_plan(string n){
+void Planner::ones_plan(string n) {
 
-	Planner *p = head;
-	string name = n;
-	
-       while(p != NULL){
-       if(p->task->name == name){
-       cout << "Task : " << p->task->text << "\n Importance: " << p->task->imp << "\n Lead time: " << p->task->time << "\n" << endl;
-       
-       }
-       p=p->next;
-       
-       }
-}		
-		
-	
+  Plan * p = head;
+  string name = n;
+
+  while (p != NULL) {
+    if (p -> task -> name == name) {
+      cout << "Task : " << p -> task -> text << "\n Importance: " << p -> task -> imp << "\n Lead time: " << p -> task -> time << "\n" << endl;
+
+    }
+    p = p -> next;
+
+  }
+}
+
 //delete completed task 		
-int Planner::completed_task(DeadlineTask *T){
+int Planner::completed_task(string identifier) {
 
- Planner *p = head;
-        while(p->next != NULL)
-        {
-            if(p->next->task == T)
-            {
-            	cout << "Task : " << T->text << "\n Importance: " << T->imp << "\n Lead time: " << T->time << "\n" << endl;
-                Planner *y = p->next->next;
-                delete(T);
-                p->next = y;
-                return 0;
-            }
-        }
-        return 1;
-}	
-		
-		
-		
+  Plan * p = head;
+  string ct = identifier;
+  
+
+  while (p != NULL) {
+  
+  
+
+    if (p -> task -> id == ct) {//находим выполненное задание по идентификатору
+      cout << "You completed task : " << p -> task -> text << "\n Importance: " << p -> task -> imp << "\n Lead time: " << p -> task -> time << "\n" << endl;//выводим все о нем 
+  
+  	Plan *T1 = p;
+  
+  
+  //PERIODICAL TASK CASE
+      if (p -> task -> is_periodical()) {//если оно периодическое, то надо добавить заново
+        //увеличиваем время (Добавляем период)
+        p->task->time+=p->task->period;
+        printf("new time = %d\n", p->task->time);
+        //добавляем его в список
+        Plan *T = p;
+        Plan * p1 = head;
+  	printf("is periodical = %d\n", T -> task -> is_periodical());
+ 		 while (p1 -> next != NULL) {
+
+    			if ( * (T -> task) > * (p1 -> next -> task)) {
+
+      				p = p1 -> next;
+    			} else {
+
+      				break;
+    			}
+  }
+  T -> next = p -> next;
+  p -> next = T;
+           
+  }
+    
+  //Удаляем выполненное задание
+  	
+  Plan * y = p -> next;
+  delete(T1);
+  p -> next = y;
+  return 0;
+}
+}
+return 1;
+}
 		
 		
 		

@@ -57,34 +57,27 @@ void test_list() {
     //add them to the plan
    // Plan *Plan1 = new Plan(t1);
     string day = "day1";
+    Planner *Planner1 = new Planner(day);
     
-printf("i'm here 1 \n");
-    PeriodicalTask *t1= new PeriodicalTask("id", "text", "name", 2, 11, 1);
-    Planner *Planner1 = new Planner(t1, day);
-    printf("i'm here 2 \n");
-    PeriodicalTask *t2= new PeriodicalTask("id", "text", "name", 1, 10, 3);   
-    printf("i'm here 3 \n");
-    Planner1->add_task(t2);
-    printf("i'm here 4\n");
+
+    PeriodicalTask *t1= new PeriodicalTask("id", "text", "name", 3, 11,1);
+        
+    Plan *Plan1= new Plan (t1);
+    Planner1->add_task(Plan1);
+    
+    
+    
     if(Planner1->day != day) printf("Error 1\n");
     
-    int i=0;
-    Planner *p = Planner1->head;
-    while(p!=NULL)
-    {
-        i++; 
-        p=p->next;
-        printf(" i = %d \n ", i);
-    }
-    printf(" i = %d \n ", i);
-    
-    // Создаём планировщик:
-
-    
-	
-
-
+    Planner1->ones_plan("name");
+    Planner1->completed_task("id");
+    //Planner1->ones_plan("name");
+   
 }    
+
+
+
+	
 
 int main() {
     test_deadline();

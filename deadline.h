@@ -142,7 +142,6 @@ void ones_plan(string n);
 
 int completed_task(string identifier);
 
-
 };
 
 

@@ -60,18 +60,24 @@ void test_list() {
     Planner *Planner1 = new Planner(day);
     
 
-    PeriodicalTask *t1= new PeriodicalTask("id", "text", "name", 3, 11,2);
+    DeadlineTask *t1= new DeadlineTask("id", "text", "name", 3, 11);
         
     Plan *Plan1= new Plan (t1);
     Planner1->add_task(Plan1);
     
     
-    
     if(Planner1->day != day) printf("Error 1\n");
+   
+    PeriodicalTask *p1 = new PeriodicalTask("id1 ", "text1", "name", 1, 12, 2);
+    Plan *Plan2 = new Plan (p1);
     
-    //Planner1->ones_plan("name");
-    Planner1->completed_task("id");
-    //Planner1->ones_plan("name");
+    Planner1->add_task(Plan2);
+   printf("first\n");
+    Planner1->ones_plan("name");
+    Planner1->completed_task("id1");
+    printf("second\n");
+    Planner1->ones_plan("name");
+    
    
 }    
 

@@ -36,7 +36,7 @@ bool PeriodicalTask::change_time() {
 //periodical task is inserted several times, taking into account the period within a day
 void Planner::add_task(Plan * T) {
   Plan * p = head;
- // printf("is periodical = %d\n", T -> task -> is_periodical());
+  //printf("is periodical = %d\n", T -> task -> is_periodical());
   while (p -> next != NULL) {
 
     if ( * (T -> task) > * (p -> next -> task)) {
@@ -68,31 +68,30 @@ void Planner::ones_plan(string n) {
 
 //delete completed task 		
 int Planner::completed_task(string identifier) {
-
-  Plan * p = head;
   string ct = identifier;
-  
-  printf("HELLO!");
-  while (p != NULL) {
-  
+  Plan * p = head;
   
 
-    if (p -> task -> id == ct) {//находим выполненное задание по идентификатору
+  while (p != NULL) {
+  //printf("imhere1");
+  //находим выполненное задание по идентификатору
+    if (p -> task -> id == ct) {
       cout << "You completed task : " << p -> task -> text << "\n Importance: " << p -> task -> imp << "\n Lead time: " << p -> task -> time << "\n" << endl;//выводим все о нем 
   
   	Plan *T1 = p;
-  
-  
-  //PERIODICAL TASK CASE
+      //PERIODICAL TASK CASE
+      
       if (p -> task -> is_periodical()) {//если оно периодическое, то надо добавить заново
         //увеличиваем время (Добавляем период)
+         //printf("is periodical = %d\n", p -> task -> is_periodical());
         PeriodicalTask* pp = dynamic_cast<PeriodicalTask*>(p -> task);
+        printf("im here\n");
 	p->task->time += pp->period;
         printf("new time = %d\n", p->task->time);
         //добавляем его в список
         Plan *T = p;
         Plan * p1 = head;
-  	printf("is periodical = %d\n", T -> task -> is_periodical());
+  	//printf("is periodical = %d\n", T -> task -> is_periodical());
  		 while (p1 -> next != NULL) {
 
     			if ( * (T -> task) > * (p1 -> next -> task)) {
@@ -107,6 +106,8 @@ int Planner::completed_task(string identifier) {
   p -> next = T;
            
   }
+  
+  else {break;};
     
   //Удаляем выполненное задание
   	
@@ -115,6 +116,7 @@ int Planner::completed_task(string identifier) {
   p -> next = y;
   return 0;
 }
+else {p = p->next;};
 }
 return 1;
 }

@@ -36,7 +36,7 @@ bool PeriodicalTask::change_time() {
 //periodical task is inserted several times, taking into account the period within a day
 void Planner::add_task(Plan * T) {
   Plan * p = head;
-  printf("is periodical = %d\n", T -> task -> is_periodical());
+ // printf("is periodical = %d\n", T -> task -> is_periodical());
   while (p -> next != NULL) {
 
     if ( * (T -> task) > * (p -> next -> task)) {
@@ -72,7 +72,7 @@ int Planner::completed_task(string identifier) {
   Plan * p = head;
   string ct = identifier;
   
-
+  printf("HELLO!");
   while (p != NULL) {
   
   
@@ -86,7 +86,8 @@ int Planner::completed_task(string identifier) {
   //PERIODICAL TASK CASE
       if (p -> task -> is_periodical()) {//если оно периодическое, то надо добавить заново
         //увеличиваем время (Добавляем период)
-        p->task->time+=p->task->period;
+        PeriodicalTask* pp = dynamic_cast<PeriodicalTask*>(p -> task);
+	p->task->time += pp->period;
         printf("new time = %d\n", p->task->time);
         //добавляем его в список
         Plan *T = p;

@@ -60,7 +60,7 @@ void test_list() {
     Planner *Planner1 = new Planner(day);
     
 
-    PeriodicalTask *t1= new PeriodicalTask("id", "text", "name", 3, 11,1);
+    PeriodicalTask *t1= new PeriodicalTask("id", "text", "name", 3, 11,2);
         
     Plan *Plan1= new Plan (t1);
     Planner1->add_task(Plan1);
@@ -69,7 +69,7 @@ void test_list() {
     
     if(Planner1->day != day) printf("Error 1\n");
     
-    Planner1->ones_plan("name");
+    //Planner1->ones_plan("name");
     Planner1->completed_task("id");
     //Planner1->ones_plan("name");
    

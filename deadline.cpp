@@ -32,14 +32,14 @@ bool PeriodicalTask::change_time(){
 
 //task with a deadline is inserted at the right place in an already ordered list
 //periodical task is inserted several times, taking into account the period within a day
-void Planner::add_task(Plan *T){
-	Plan *p = head;
+void Planner::add_task(DeadlineTask *T){
+	Planner *p = head;
 	
-	if (!T->task->is_periodical()){
+	if (!T->is_periodical()){
 	
 		 while(p->next != NULL)
     {
-        if(*(T->task) > *(p->next->task))
+        if(T > p->next->task)
         {
             p=p->next;
         }
@@ -49,13 +49,13 @@ void Planner::add_task(Plan *T){
         } 
     } 
 	}
-	else{   int Pd = T->task->is_periodical();
-		while((p->next != NULL) && (T->task->time < 23))
+	else{   int Pd = T->is_periodical();
+		while((p->next != NULL) && (T->time < 23))
 	    {
-	    	printf("time now = %d", T->task->time);
-		if(*(T->task) > *(p->next->task))
+	    	printf("time now = %d", T->time);
+		if(T > p->next->task)
 		{
-		    T->task->time+=Pd;
+		    T->time+=Pd;
 		    p=p->next;
 		    
 		}
@@ -68,7 +68,7 @@ void Planner::add_task(Plan *T){
 //Displays information about tasks for one executor				
 void Planner::ones_plan(string n){
 
-	Plan *p = head;
+	Planner *p = head;
 	string name = n;
 	
        while(p != NULL){
@@ -83,15 +83,15 @@ void Planner::ones_plan(string n){
 		
 	
 //delete completed task 		
-int Planner::completed_task(Plan *T){
+int Planner::completed_task(DeadlineTask *T){
 
- Plan *p = head;
+ Planner *p = head;
         while(p->next != NULL)
         {
-            if(p->next == T)
+            if(p->next->task == T)
             {
-            	cout << "Task : " << T->task->text << "\n Importance: " << T->task->imp << "\n Lead time: " << T->task->time << "\n" << endl;
-                Plan *y = T->next;
+            	cout << "Task : " << T->text << "\n Importance: " << T->imp << "\n Lead time: " << T->time << "\n" << endl;
+                Planner *y = p->next->next;
                 delete(T);
                 p->next = y;
                 return 0;

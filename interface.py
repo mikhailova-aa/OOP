@@ -11,7 +11,7 @@ deadline_lib.create_periodical.argtypes = [ctypes.c_char_p, ctypes.c_char_p, cty
 deadline_lib.create_periodical.restype = ctypes.c_void_p
 
 deadline_lib.create_planner.argtypes = [ctypes.c_char_p]
-deadline_lib.create_planner.restype = ctypes.с_void_p
+deadline_lib.create_planner.restype = ctypes.c_void_p
 
 deadline_lib.create_plan.argtypes = [ctypes.c_void_p]
 deadline_lib.create_plan.restype = ctypes.c_void_p
@@ -23,7 +23,7 @@ deadline_lib.print_plan.argtypes = [ctypes.c_char_p, ctypes.c_void_p]
 deadline_lib.print_plan.restype = ctypes.c_void_p
 
 deadline_lib.complete.argtypes = [ctypes.c_char_p, ctypes.c_void_p]
-deadline_lib.complete.restype = ctypes_c_int
+deadline_lib.complete.restype = ctypes.c_int
 
 opr = '0'
 
@@ -74,12 +74,12 @@ def show():
 	name = ctypes.c_char_p(name.encod('utf-8'))
 	deadline_lib.print_plan(name, planner)
 
+day = input("Введите день:")
+day = ctypes.c_char_p(day.encode('utf-8'))
+planner = deadline_lib.create_planner(day)
 		
 
-while opr != '4':
-	day = input("Введите день:")
-	day = ctypes.c_char_p(day.encode('utf-8'))
-	planner = deadline_lib.create_planner(day)
+while opr != "4":
 	operation = input("Выберите действие:" "\n1.Добавить задание\n2.Удалить задание\n3.Показать план\n4. Выйти\n")
 	if opr == "1":
 		add_task()

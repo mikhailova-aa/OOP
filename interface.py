@@ -38,6 +38,9 @@ def add_task():
 		name = input("Введите имя исполнителя ")
 		name = ctypes.c_char_p(name.encode('utf-8'))
 		imp = input("Введите важность от 1 до 3 ")
+		while (int(imp) <= 0 or int(imp) >= 4):
+			print ("Ошибка. Введите число от 1 до 3 ")
+			imp = input("Введите важность от 1 до 3 ")
 		time = input("Введите время от 0 до 23")
 		while True:
 			try:
@@ -59,11 +62,8 @@ def add_task():
 	print("Добавляю задание ")
 	if get_type == '1':
 		d1 = deadline_lib.create_deadline(ident, t, name, int(imp), int(time))
-		if d1 == 0:
-			print("Ошибка. Попробуйте заново")
-		else:
-			plan = deadline_lib.create_plan(d1)
-			deadline_lib.add_task(plan, planner)
+		plan = deadline_lib.create_plan(d1)
+		deadline_lib.add_task(plan, planner)
 	elif get_type == '2':
 		p1 = deadline_lib.create_periodical(ident, t, name, int(imp), int(time),int(period))
 		plan = deadline_lib.create_plan(p1)

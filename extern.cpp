@@ -8,7 +8,7 @@ extern "C"{
 		}
 	
 	PeriodicalTask* create_periodical(char* id, char* text, char* name, int imp, int time, int period){
-		return new DeadlineTask(id, text, name, imp, time, period);
+		return new PeriodicalTask(id, text, name, imp, time, period);
 		}
 	Planner* create_planner(char* day){
 		return new Planner(day);

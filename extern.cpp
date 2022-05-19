@@ -14,7 +14,7 @@ extern "C"{
 		return new Planner(day);
 		}
 	Plan* create_plan(DeadlineTask* d1){
-		return new Plan(d1)
+		return new Plan(d1);
 		}
 	void add_task(Plan *T, Planner *p1){
 		p1->add_task(T);

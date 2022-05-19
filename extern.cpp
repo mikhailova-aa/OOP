@@ -13,10 +13,13 @@ extern "C"{
 	Planner* create_planner(char* day){
 		return new Planner(day);
 		}
+	Plan* create_plan(DeadlineTask* d1){
+		return new Plan(d1)
+		}
 	void add_task(Plan *T, Planner *p1){
 		p1->add_task(T);
 		}
-	void print(char *n, Planner *p1){
+	void print_plan(char *n, Planner *p1){
 		p1->ones_plan(n);
 		}
 	int complete(char *id, Planner *p1){

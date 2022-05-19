@@ -19,9 +19,7 @@ public:
     string name; //executor
     int imp; // level of importance, on a scale of 1 to 3
     int time; // deadline timestamp, on a scale of 0 to 23
- //   int per; // label 0 or 1 for deadline tasks and petiodical
-
-
+  
 // creating task with params
 
 DeadlineTask(const string& id, const string& text, const string& name, int imp, int time)

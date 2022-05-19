@@ -42,6 +42,13 @@ def add_task():
 			print ("Ошибка. Введите число от 1 до 3 ")
 			imp = input("Введите важность от 1 до 3 ")
 		time = input("Введите время от 0 до 23")
+		while True:
+			try:
+				time = int(time)
+				break
+			except ValueError:
+				print("Ошибка. Введите число от 0 до 23 ")
+				time = input("Введите время от 0 до 23 ")
 		while ((int(time) < 0) or (int(time) > 23)):
 			print ("Ошибка. Введите число от 0 до 23 ")
 			time = input("Введите время от 0 до 23 ")
@@ -49,19 +56,19 @@ def add_task():
 			flag = 0
 		elif get_type == '2':
 			period = input("Введите период : ")
-		flag = 0
-	else:
-		print("Ошибка. Выберите верный тип задания. ")
-		print("Добавляю задание ")
-		if get_type == '1':
-			d1 = deadline_lib.create_deadline(ident, t, name, int(imp), int(time))
-			plan = deadline_lib.create_plan(d1)
-			deadline_lib.add_task(plan, planner)
-		elif get_type == '2':
-			p1 = deadline_lib.create_periodical(ident, t, name, int(imp), int(time),int(period))
-			plan = deadline_lib.create_plan(p1)
-			deadline_lib.add_task(plan, planner)
-		print("Задание " + text + " добавлено")
+			flag = 0
+		else:
+			print("Ошибка. Выберите верный тип задания. ")
+	print("Добавляю задание ")
+	if get_type == '1':
+		d1 = deadline_lib.create_deadline(ident, t, name, int(imp), int(time))
+		plan = deadline_lib.create_plan(d1)
+		deadline_lib.add_task(plan, planner)
+	elif get_type == '2':
+		p1 = deadline_lib.create_periodical(ident, t, name, int(imp), int(time),int(period))
+		plan = deadline_lib.create_plan(p1)
+		deadline_lib.add_task(plan, planner)
+	print("Задание " + text + " добавлено")
 
 def del_task():
 	ident = input("Введите идентификатор выполненного задания ")

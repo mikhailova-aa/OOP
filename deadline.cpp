@@ -70,10 +70,10 @@ void Planner::ones_plan(string n) {
 int Planner::completed_task(string identifier) {
   string ct = identifier;
   Plan * p = head;
-  cout << "identifier = " << ct << endl;
+ // cout << "identifier = " << ct << endl;
 
   while (p != NULL) {
-    printf("imhere1\n");
+   // printf("imhere1\n");
     //находим выполненное задание по идентификатору
     if (p -> task -> id == ct) {
 	      cout << "You completed task : " << p -> task -> text << "\n Importance: " << p -> task -> imp << "\n Lead time: " << p -> task -> time << "\n" << endl; //выводим все о нем 

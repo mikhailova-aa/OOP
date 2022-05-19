@@ -68,14 +68,14 @@ void test_list() {
     
     if(Planner1->day != day) printf("Error 1\n");
    
-    PeriodicalTask *p1 = new PeriodicalTask("id1 ", "text1", "name", 1, 12, 2);
+    DeadlineTask *p1 = new DeadlineTask("id1 ", "text1", "name", 1, 12);
     Plan *Plan2 = new Plan (p1);
     
     Planner1->add_task(Plan2);
-   printf("first\n");
+   printf("first\n\n");
     Planner1->ones_plan("name");
     Planner1->completed_task("id1");
-    printf("second\n");
+    printf("second\n\n");
     Planner1->ones_plan("name");
     
    

@@ -70,67 +70,54 @@ void Planner::ones_plan(string n) {
 int Planner::completed_task(string identifier) {
   string ct = identifier;
   Plan * p = head;
-  
+  cout << "identifier = " << ct << endl;
 
   while (p != NULL) {
-  //printf("imhere1");
-  //находим выполненное задание по идентификатору
+    printf("imhere1\n");
+    //находим выполненное задание по идентификатору
     if (p -> task -> id == ct) {
-      cout << "You completed task : " << p -> task -> text << "\n Importance: " << p -> task -> imp << "\n Lead time: " << p -> task -> time << "\n" << endl;//выводим все о нем 
-  
-  	Plan *T1 = p;
-      //PERIODICAL TASK CASE
-      
-      if (p -> task -> is_periodical()) {//если оно периодическое, то надо добавить заново
-        //увеличиваем время (Добавляем период)
-         //printf("is periodical = %d\n", p -> task -> is_periodical());
-        PeriodicalTask* pp = dynamic_cast<PeriodicalTask*>(p -> task);
-        printf("im here\n");
-	p->task->time += pp->period;
-        printf("new time = %d\n", p->task->time);
-        //добавляем его в список
-        Plan *T = p;
-        Plan * p1 = head;
-  	//printf("is periodical = %d\n", T -> task -> is_periodical());
- 		 while (p1 -> next != NULL) {
+	      cout << "You completed task : " << p -> task -> text << "\n Importance: " << p -> task -> imp << "\n Lead time: " << p -> task -> time << "\n" << endl; //выводим все о нем 
 
-    			if ( * (T -> task) > * (p1 -> next -> task)) {
+	      Plan * T1 = p;
+	      //PERIODICAL TASK CASE
 
-      				p = p1 -> next;
-    			} else {
+	      if (p -> task -> is_periodical()) { //если оно периодическое, то надо добавить заново
+			//увеличиваем время (Добавляем период)
+			printf("is periodical = %d\n", p -> task -> is_periodical());
+			PeriodicalTask * pp = dynamic_cast < PeriodicalTask * > (p -> task);
+			printf("im here\n");
+			p -> task -> time += pp -> period;
+			printf("new time = %d\n", p -> task -> time);
+			//добавляем его в список
+			Plan * T = p;
+			Plan * p1 = head;
+			//printf("is periodical = %d\n", T -> task -> is_periodical());
+			while (p1 -> next != NULL) {
 
-      				break;
-    			}
+			  if ( * (T -> task) > * (p1 -> next -> task)) {
+
+			    	p = p1 -> next;
+			  } else {
+
+			    break;
+			  }
+			}
+			T -> next = p -> next;
+			p -> next = T;
+
+	      } else {
+		break; //если не переодическое переходим сразу к удалению
+	      };
+
+	      //Удаляем выполненное задание
+		printf("now im deleting\n");
+	      Plan * y = p -> next;
+	      delete(T1);
+	      p -> next = y;
+	      return 0;
+    } else {
+      p = p -> next;
+    };
   }
-  T -> next = p -> next;
-  p -> next = T;
-           
-  }
-  
-  else {break;};
-    
-  //Удаляем выполненное задание
-  	
-  Plan * y = p -> next;
-  delete(T1);
-  p -> next = y;
-  return 0;
+  return 1;
 }
-else {p = p->next;};
-}
-return 1;
-}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-

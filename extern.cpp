@@ -21,7 +21,7 @@ extern "C"{
 		p1->add_task(T);
 		return 0;
 		}
-	catch(exeption)
+	catch(...)
 	{return 1;}
 		}
 	void print_plan(char *n, Planner *p1){

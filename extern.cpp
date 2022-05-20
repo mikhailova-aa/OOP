@@ -16,8 +16,13 @@ extern "C"{
 	Plan* create_plan(DeadlineTask* d1){
 		return new Plan(d1);
 		}
-	void add_task(Plan *T, Planner *p1){
+	int add_task(Plan *T, Planner *p1){
+	try {
 		p1->add_task(T);
+		return 0;
+		}
+	catch(exeption)
+	{return 1;}
 		}
 	void print_plan(char *n, Planner *p1){
 		p1->ones_plan(n);

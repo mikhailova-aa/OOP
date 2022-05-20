@@ -63,7 +63,12 @@ def add_task():
 	if get_type == '1':
 		d1 = deadline_lib.create_deadline(ident, t, name, int(imp), int(time))
 		plan = deadline_lib.create_plan(d1)
-		deadline_lib.add_task(plan, planner)
+		error = deadline_lib.add_task(plan, planner)
+		if error == 0:
+			print ("Ok")
+		else:
+			print("Что-то пошло не так")
+			pass
 	elif get_type == '2':
 		p1 = deadline_lib.create_periodical(ident, t, name, int(imp), int(time),int(period))
 		plan = deadline_lib.create_plan(p1)

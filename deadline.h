@@ -23,14 +23,7 @@ public:
 // creating task with params
 
 DeadlineTask(const string& id, const string& text, const string& name, int imp, int time)
-    :id(id), text(text), name(name), imp(imp), time(time){
-    
-    if (imp < 0){
-    	throw exception();
-    	}
-    
-    
-    }
+    :id(id), text(text), name(name), imp(imp), time(time){}
     
 
     

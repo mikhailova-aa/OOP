@@ -36,7 +36,10 @@ bool PeriodicalTask::change_time() {
 //periodical task is inserted several times, taking into account the period within a day
 void Planner::add_task(Plan * T) {
   Plan * p = head;
-  //printf("is periodical = %d\n", T -> task -> is_periodical());
+  if ( T->task->imp < 0){
+  throw exception();
+  }
+  else{
   while (p -> next != NULL) {
 
     if ( * (T -> task) > * (p -> next -> task)) {
@@ -49,7 +52,7 @@ void Planner::add_task(Plan * T) {
   }
   T -> next = p -> next;
   p -> next = T;
-}
+}}
 //Displays information about tasks for one executor				
 void Planner::ones_plan(string n) {
 

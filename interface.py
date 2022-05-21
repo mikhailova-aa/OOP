@@ -38,9 +38,9 @@ def add_task():
 		name = input("Введите имя исполнителя ")
 		name = ctypes.c_char_p(name.encode('utf-8'))
 		imp = input("Введите важность от 1 до 3 ")
-		while (int(imp) <= 0 or int(imp) >= 4):
-			print ("Ошибка. Введите число от 1 до 3 ")
-			imp = input("Введите важность от 1 до 3 ")
+		#while (int(imp) <= 0 or int(imp) >= 4):
+		#	print ("Ошибка. Введите число от 1 до 3 ")
+		#	imp = input("Введите важность от 1 до 3 ")
 		time = input("Введите время от 0 до 23")
 		while True:
 			try:
@@ -66,6 +66,7 @@ def add_task():
 		error = deadline_lib.add_task(plan, planner)
 		if error == 0:
 			print ("Ok")
+			pass
 		else:
 			print("Что-то пошло не так")
 			pass

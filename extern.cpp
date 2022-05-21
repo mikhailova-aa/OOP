@@ -18,9 +18,10 @@ extern "C"{
 		}
 	int add_task(Plan *T, Planner *p1){
 	try {
-		p1->add_task(T);
+		p1->add_task(T); 
 		return 0;
 		}
+	
 	catch(...)
 	{return 1;}
 		}

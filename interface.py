@@ -59,22 +59,22 @@ def add_task():
 			flag = 0
 		else:
 			print("Ошибка. Выберите верный тип задания. ")
-	print("Добавляю задание ")
+	
 	if get_type == '1':
 		d1 = deadline_lib.create_deadline(ident, t, name, int(imp), int(time))
 		plan = deadline_lib.create_plan(d1)
 		error = deadline_lib.add_task(plan, planner)
 		if error == 0:
-			print ("Ok")
+			print("Задание " + text + " добавлено")
 			pass
 		else:
-			print("Что-то пошло не так")
+			print("Задание не добавлено, попробуйте еще раз")
 			pass
 	elif get_type == '2':
 		p1 = deadline_lib.create_periodical(ident, t, name, int(imp), int(time),int(period))
 		plan = deadline_lib.create_plan(p1)
 		deadline_lib.add_task(plan, planner)
-	print("Задание " + text + " добавлено")
+	
 
 def del_task():
 	ident = input("Введите идентификатор выполненного задания ")

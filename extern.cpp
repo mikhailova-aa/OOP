@@ -1,6 +1,7 @@
 #include<iostream>
 #include <cstring>
 #include "deadline.h"
+#include <exception>
 
 extern "C"{
 	DeadlineTask* create_deadline(char* id, char* text, char* name, int imp, int time){
@@ -17,13 +18,13 @@ extern "C"{
 		return new Plan(d1);
 		}
 	int add_task(Plan *T, Planner *p1){
-	try {
+	try{
 		p1->add_task(T); 
 		return 0;
 		}
-	
-	catch(...)
-	{return 1;}
+	catch(exception){return 1;}
+		
+		
 		}
 	void print_plan(char *n, Planner *p1){
 		p1->ones_plan(n);
